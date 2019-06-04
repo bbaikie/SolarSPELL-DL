@@ -1,0 +1,395 @@
+    <!doctype html>
+    <html>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{ url_for('static',filename='js/jquery-3.3.1.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/jquery.dataTables.min.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/jquery.dataTables.min.css') }}">
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/w3.css') }}">
+
+
+
+    <title>Solar Spell</title>
+    <style>
+
+    .navbar-toggle .icon-bar{ background-color: #fff;}
+        .center-box {
+  display: block;
+  position: absolute;
+   left: 35%;
+
+
+
+    }
+    .search-box{
+       border-radius: 25px;
+       border: 2px solid  white;
+       text-align:center;
+    }
+    .search-box:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+    .center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 3em;
+  height:3em;
+    }
+
+    .filter-box
+    {
+       border-radius: 25px;
+       border: 2px solid  white;
+       text-align:center;
+       background-color:white;
+    }
+
+    .shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    img {
+      width: 20px;
+      height: 20px;
+
+    }
+
+
+    body {
+      background-color: #e6e6e6;
+    }
+
+    table {
+      border-style: none;
+      width: 100%;
+
+    }
+     td {
+
+      text-align: left;
+      border-style: none;
+      border-bottom: 1px solid #ddd;
+      font-size: 12px;
+    }
+
+
+
+    .contentDiv{
+      padding-top: 20px;
+      padding-right: 20px;
+      padding-bottom: 20px;
+      padding-left: 20px;
+      background-color: #FFFFFF;
+      width: 90%;
+    }
+
+    table.dataTable thead td {
+      border-bottom: 1px solid #ddd;
+      font-weight:bold;
+      background-color: white;
+      border-color:white;
+      font-size: 20px;
+      border-radius: 5px;
+      font-family: "Lucida Sans Unicode";
+
+    }
+
+    table.dataTable.no-footer   {
+      border : 0;
+    }
+
+    .side_menu_heading_style{
+    color: #004d99;
+    padding-top:10px;
+    font-size: 1.5em;
+    font-weight:bold;
+    text-align:center;
+    }
+
+    .side_bar_text{
+    font-weight:500;
+    font-size: .85em;
+    font-family: "Lucida Sans Unicode";
+
+
+    }
+    .sidebar-hr-line{
+    width: 100%;
+    position: relative;
+    border-bottom: .5px solid  #e6e6e6;
+    }
+
+    a:hover{text-decoration:none}
+
+    </style>
+
+
+    <style>
+
+
+
+
+    .modal-hr-line {
+    width: 100%;
+    position: relative;
+    border-bottom: 3px solid #004d99;
+    }
+
+    .modal-content-iframe{
+    width: 100%;
+    height: 500px;
+    max-height: 100%;
+    border-bottom: 3px solid #004d99;
+    border-top: 3px solid #004d99;
+    }
+
+
+    </style>
+    <style>
+    i {
+      border: solid black;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+    }
+
+    .left {
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+
+
+
+
+    </style>
+
+
+
+        <nav class="navbar navbar-inverse" style=" background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);  border-radius: 0px;
+         border-color: #9ecaed;    margin: 0px; padding: 0px; ">
+            <div class="container-fluid">
+
+                <div class="navbar-header"><center><div style="width: 20em; max-width: 200px; "> <center>
+                    <img id="main_page_link" style="width: 3em; height: 100%"  src='/static/images/logo_small2.png'></center></div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                               <span class="sr-only">Toggle navigation</span>
+                               <span class="icon-bar"></span>
+                               <span class="icon-bar"></span>
+                               <span class="icon-bar"></span>
+
+
+                    </button></center>
+
+                </div>
+                <div class="collapse navbar-collapse nav-right" id="myNavbar">
+                    <ul id="top_menu_ui" class="nav navbar-nav"></ul>
+
+                </div>
+            </div>
+        </nav>
+        <div id="banner_div" style="background-color: white;  margin: 0px; padding: 0px;   ">
+            <img class="shadow" style="width: 100%; height: 25em;  "src='/static/images/banner.png'></a>
+        </div>
+
+
+
+
+  <center><div class="container-fluid" style="background-color:white; padding:7%; max-width:100%">
+
+        <h1>About Us</h1>
+        <p>
+            SolarSPELL is a Solar Powered Education Learning Library; an easy to use, solar-powered, offline digital library that was developed to overcome existing barriers to accessing educational resources. SolarSPELL generates an offline Wi-Fi hotspot, to which any Wi-Fi capable device (smartphones, tablets, or laptops) can connect, enabling students and teachers to surf the library's resources. In this capacity, SolarSPELL empowers resource-constrained communities with open-access content across a broad range of topics, from math to regionally-relevant subjects, for all ages. Our goal is to provide relevant, localized educational content to resource-constrained locations around the world and to promote individual and community-wide capacity building. SolarSPELL digital libraries are currently being used by schools, health clinics, and communities across the Pacific Islands (Vanuatu, Fiji, Samoa, Tonga, and Micronesia) and East Africa (Rwanda, Comoros, and South Sudan).
+        </p>
+        <br />
+        <table>
+        <tr ><td   style="  padding: 15px" >
+        <a href="/static/videos/about_us_subtitled.mp4"><img class="shadow center-img" src=/static/images/about_us_thumbnail.jpg
+        style="height:30%  ; width:50%;min-width:200px; min-height:10px;
+                                            max-width:100%; max-height:100%; "></a>
+        <p  >
+            <center><em>Know more about us</em></center>
+        </p>
+        </td>
+        <tr><center>
+        <td  style="  padding: 15px">
+        <a href="/static/videos/build_day_video.mp4"><img class="shadow center-img" src=/static/images/build_day_thumbnail.png
+                                            style="height:30%  ; width:50%; min-width:200px; min-height:10px;
+                                            max-width:100%; max-height:100%;   " >
+        </a>
+
+
+        <p>
+           <center> <em>Our Build Day at ASU </em> </center>
+        </p>
+        </td>
+            </center>
+		</tr>
+		<tr>
+        <td  style="  padding: 15px">
+        <a href="/static/videos/instruction_video.mp4"><img class="shadow center-img" src=/static/images/instruction_thumbnail.png
+                                              style="height:30%  ; width:50%;min-width:200px;min-height:10px;
+                                            max-width:100%; max-height:100%; " ></a>
+
+        <p>
+           <center> <em>Building a SolarSpell</em></center>
+        </p>
+        </td>
+		</tr>
+        </table>
+
+        <h2>Want to learn more about the SPELL?</h2>
+        <p>
+            Visit us online at: <a href="http://solarspell.org/">solarspell.org</a>
+        </p>
+        <p>
+            Contact us at: <a href="mailto:team@solarspell.org?subject=SPELL">team@solarspell.org</a>
+        </p>
+	   <hr />
+  </div ></center>
+
+    <div  style="    width: 100%; height: 7em; background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%,  #16d9e3 100%); " >
+        <div class="center-box" style="width:100%;padding-top:1em; padding-bottom:2em; position: relative;
+                    " >
+
+            <div class="row " style=" fontFamily= ' sans-serif'; ">
+
+            <!--<button class="filter-box col-sm-4"  style="width:32%;  height: 2.5em; color:#16d9e3; " type="text"  >-->
+                <!--&lt;!&ndash;<span  justify-content: space-between; ><b> About Us </span> </b></button>&ndash;&gt;-->
+
+            </div>
+        </div>
+
+    </div>
+
+  <div class="container  " style="background-color:gray;  width:100%;">
+
+      <div class="row " style="  width:100%; ">
+      <center>
+      <div class="col-sm-4" style="  margin:auto; width: 50%;  height: 50%;"><img style=" width: 100%;  height: 100% ;  "src='/static/images/logo.png'> </div>
+      <div class="col-sm-4" style="  margin:auto; width: 50%;  height: 50%; "><img style=" width: 100%;  height: 100%;  "src='/static/images/asu_logo.png'> </div>
+      </center>
+      </div>
+
+  </div>
+
+
+
+
+    </body>
+    <script>
+         function mainMenuCreate(){
+     var menu_titles_original =  {{ menu_titles  |safe  }} ;
+    <!--console.log("menu_titles:"+JSON.stringify(menu_titles_original));-->
+    for (key  in menu_titles_original){
+       item=menu_titles_original[key]
+       var container_div = document.createElement("li");
+       container_div.className +="dropdown";
+       var container_drop_button = document.createElement("a");
+       container_drop_button.setAttribute("data-toggle", "dropdown");
+       container_drop_button.textContent=item["name"];
+       container_drop_button.style.color="white";
+       container_drop_button.style.fontFamily= "sans-serif";
+       container_drop_button.style.fontSize="small";
+       container_drop_button.setAttribute("href", "#");
+        container_div.appendChild(container_drop_button);
+       container_drop_button.className +="dropdown-toggle";
+
+       span_container_drop_button=document.createElement("span");
+       span_container_drop_button.className +="caret";
+       container_drop_button.appendChild(span_container_drop_button);
+
+       var dropping_div = document.createElement("ul");
+       dropping_div.className +="dropdown-menu";
+       container_div.appendChild(dropping_div);
+       console.log(item.name.substring(0, 5));
+       dropping_div.setAttribute("id", item.name.substring(0, 5)+"_menu" );
+       for (sub_key in item.children ){
+       sub_title_item=item.children[sub_key]
+       console.log(item.children)
+
+       var li_content = document.createElement("li");
+       var a1 = document.createElement("a");
+       a1.className+="main_menu_sub_title";
+
+
+       a1.setAttribute("data-title", item.name);
+       a1.setAttribute("data-subtitle",sub_title_item.name);
+       a1.setAttribute("data-subtitle-path",sub_title_item.path);
+       a1.style.color = "black";
+       a1.style.backgroundColor = "white";
+
+
+       a1.textContent= sub_title_item.name ;
+       li_content.appendChild(a1);
+       dropping_div.appendChild(li_content);
+        }
+
+
+       var main_menu = document.getElementById("top_menu_ui");
+       main_menu.appendChild(container_div);
+       }
+      var reference_tool_links_original =  {{ reference_tool_links  |safe  }} ;
+      for (key  in reference_tool_links_original){
+       var li_content = document.createElement("li");
+       var dropping_div = document.getElementById("Refer_menu");
+
+
+       var a1 = document.createElement("a");
+       a1.setAttribute("id",  "somethin1");
+       a1.className+="reference_tool_class";
+       a1.setAttribute("data-title", "something2");
+       a1.setAttribute("data-subtitle","something3");
+       a1.setAttribute("data-subtitle-path", reference_tool_links_original[key].link);
+       a1.style.color = "black";
+       a1.style.backgroundColor = "white";
+
+       a1.textContent= reference_tool_links_original[key].name ;
+       li_content.appendChild(a1);
+       dropping_div.appendChild(li_content);
+
+      }
+
+
+
+
+    }
+
+    mainMenuCreate();
+
+    $(document).on("click", ".main_menu_sub_title", function() {
+
+    title=$(this).data('title');
+    subtitle=$(this).data('subtitle');
+    window.location = '/spellmodules/' + $(this).data('subtitle-path');
+    });
+
+    $(document).on("click", "#main_page_link", function() {
+
+    window.location = '/'  ;
+    });
+        $(document).on("click", ".reference_tool_class", function() {
+
+      window.location = '/reference_tools/'  + $(this).data('subtitle-path');
+    });
+
+
+
+    </script>
+
+
+
+
+
+
+</html>
